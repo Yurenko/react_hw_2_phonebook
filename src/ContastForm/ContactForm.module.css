@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    border: 1px solid #ccc;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    width: 250px;
+    padding: 5px;
+}
+
+input {
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
