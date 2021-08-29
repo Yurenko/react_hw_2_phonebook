@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import shortid from 'shortid';
-import ContactForm from './ContastForm/ContactForm';
-import Filter from './Filter/Filter';
-import ContactList from './ContactList/ContactList';
+import PropTypes from 'prop-types';
+
+import ContactForm from './components/ContastForm/ContactForm';
+import Filter from './components/Filter/Filter';
+import ContactList from './components/ContactList/ContactList';
 
 const FilterUsr = (contacts, filter) =>
   contacts.filter(contact =>
@@ -10,10 +12,35 @@ const FilterUsr = (contacts, filter) =>
   );
 
 class App extends Component {
+  static defaultProps = {
+    contact: [],
+    filter: '',
+  };
+
+  static ProrTypes = {
+    contact: PropTypes.array,
+    filter: PropTypes.string,
+  };
+
   state = {
     contacts: [],
     filter: '',
   };
+
+  componentDidMount() {
+    const ls = localStorage.getItem('contacts');
+    const items = JSON.parse(ls);
+
+    if (!items) return;
+    this.setState({ contacts: [...items] });
+  }
+
+  componentDidUpdate(prevState) {
+    const { contacts } = this.state;
+    if (prevState.contacts !== contacts) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
+    }
+  }
 
   addUser = user => {
     const add = {
