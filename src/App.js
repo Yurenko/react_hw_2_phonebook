@@ -71,7 +71,6 @@ class App extends Component {
     const { contacts, filter } = this.state;
 
     const example = FilterUsr(contacts, filter);
-
     return (
       <div>
         <h1>Phonebook</h1>
